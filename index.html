@@ -90,8 +90,13 @@ button, input {
     margin: 5px; 
     padding: 10px;
     border: solid 1px rgb(255, 94, 0);
-    font-weight: bold
+    font-weight: bold;
+    border-radius: 15px;
+    transition: background-color 0.3s; /* Ефект переходу для фону */
 }
+button:hover {
+            background-color: rgb(114, 49, 6); /* Зміна фону при наведенні */
+        }
 
 button {
     margin: 10px; 
@@ -195,10 +200,16 @@ input[type=number] {
 
     <script>
  function calculation(data, oil) {
-    if (data > 100) {
-        message.innerHTML = "<strong>Не припустиме значення</strong>";
-        return; // Вихід з функції, якщо значення неприпустиме
-    }
+    if (isNaN(data) || data <= 0) {
+                message.innerHTML = "<strong>Не припустиме значення</strong>";
+                count.classList.add("invalid"); // Додати клас для червоної рамки
+                return; // Вихід з функції, якщо значення неприпустиме
+            }
+            if (data > 100) {
+                message.innerHTML = "<strong>Не припустиме значення</strong>";
+                count.classList.add("invalid"); // Додати клас для червоної рамки
+                return; // Вихід з функції, якщо значення неприпустиме
+            }
     message.innerHTML = `<strong>Необхідна кількість масла на ${data}л палива становить ${(data * 1000 / oil)}мл</strong>`;
 }
 
