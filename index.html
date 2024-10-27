@@ -27,6 +27,7 @@ body {
     justify-content: center;
     align-items: center;
     color: rgb(233, 142, 24);
+    text-align: center;
 }
 h1{
     margin-bottom: 15px;
@@ -35,6 +36,12 @@ h1{
 
 #count{
     text-align: center;
+    font-size: 1.2em; /* Збільшено розмір шрифту для текстового поля */
+            width: 100%; /* Ширина 100% для мобільних */
+            padding: 10px; /* Внутрішні відступи для кращого вигляду */
+            margin-bottom: 10px; /* Відступ від кнопок */
+            border: solid 1px rgb(255, 94, 0);
+            border-radius: 5px; /* Краще оформлення */
 }
 
 .appContainer {
@@ -79,7 +86,7 @@ button {
 button, input {
     background-color: rgb(138, 141, 141);
     width: 100%;
-    max-width: 150px;
+    max-width: 170px;
     margin: 5px; 
     padding: 10px;
     border: solid 1px rgb(255, 94, 0);
@@ -90,6 +97,12 @@ button {
     margin: 10px; 
     font-weight: bold
 }
+#message {
+            text-align: center; /* Центрування тексту в повідомленнях */
+            margin-top: 10px; /* Відступ для покращення вигляду */
+            color: rgb(255, 94, 0); /* Колір тексту повідомлення */
+            font-size: 1.2em; /* Збільшено розмір шрифту для повідомлень */
+        }
 
 
 input::-webkit-outer-spin-button,
@@ -109,10 +122,7 @@ input[type=number] {
     .appContainer {
         padding: 10px; /* Зменшено padding для маленьких екранів */
     }
-    button {
-        font-size: 1em; /* Зменшено розмір шрифту для кнопок на мобільних */
-        padding: 8px; /* Зменшено відступи для кнопок */
-    }
+
     svg {
         width: 100%; 
     }
