@@ -29,7 +29,7 @@ body {
     color: rgb(233, 142, 24);
 }
 h1{
-    text-align: center;
+    margin-bottom: 15px;
     
 }
 
@@ -38,8 +38,7 @@ h1{
 }
 
 .appContainer {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: 20px;
 }
 .logoContainer{
     width: 100%;
@@ -61,7 +60,8 @@ h1{
 
 svg{
     max-width: 100%;
-    width: 100%;
+    width: 80%;
+    height: auto;
     margin-bottom: 25px;
 }
 
@@ -78,9 +78,10 @@ button {
 
 button, input {
     background-color: rgb(138, 141, 141);
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
     margin: 5px; 
-    padding: 5px;
+    padding: 10px;
     border: solid 1px rgb(255, 94, 0);
     font-weight: bold
 }
@@ -104,7 +105,20 @@ input[type=number] {
 .appContainer:nth-child() {
     margin-bottom: 10px;
 }
+@media (max-width: 768px) {
+    .appContainer {
+        padding: 10px; /* Зменшено padding для маленьких екранів */
+    }
 
+    svg {
+        width: 100%; /* Логотип займає всю ширину на маленьких екранах */
+    }
+
+    button,
+    input {
+        width: 90%; /* Кнопки і поле вводу займають більшу частину ширини */
+    }
+}
 
 </style>
 
@@ -152,7 +166,7 @@ input[type=number] {
             </div>
             <div class="itemContainer">
                 <h1 style="font-style: italic;">Розрахунок кількості масла і палива</h1>
-                <label for="count" style="font-weight: bold; font-style: italic;">Кількість палива (1=літр 0.5=500мл)</label>
+                <label for="count" style="font-weight: bold; font-style: italic;">Кількість палива</label>
                 <input id="count" type="number" placeholder="0">
                 <button id="btnSynthetic">Синтетика</button>
                 <button id="btnSemiSynthetic">Напівсинтетика</button>
@@ -163,30 +177,38 @@ input[type=number] {
     </div>
 
     <script>
-        function calculation(data, oil) {
-            message.innerHTML = `<strong>Необхідна кількість масла на ${data}л палива становить ${(data * 1000 / oil)}мл</strong>`;
-        }
-    
-        let count = document.getElementById('count');
-        let btnSynthetic = document.getElementById('btnSynthetic');
-        let btnSemiSynthetic = document.getElementById('btnSemiSynthetic');
-        let message = document.getElementById('message');
-    
-        btnSynthetic.addEventListener("click", () => {
-            if (count.value === '' || isNaN(count.value) || count.value <= 0) {
-                message.innerHTML = "<strong>Вкажіть кількість палива</strong>";
-            } else {
-                calculation(count.value, 50);
-            }
-        });
-    
-        btnSemiSynthetic.addEventListener("click", () => {
-            if (count.value === '' || isNaN(count.value) || count.value <= 0) {
-                message.innerHTML = "<strong>Вкажіть кількість палива</strong>";
-            } else {
-                calculation(count.value, 40);
-            }
-        });
+ function calculation(data, oil) {
+    if (data > 100) {
+        message.innerHTML = "<strong>Не припустиме значення</strong>";
+        return; // Вихід з функції, якщо значення неприпустиме
+    }
+    message.innerHTML = `<strong>Необхідна кількість масла на ${data}л палива становить ${(data * 1000 / oil)}мл</strong>`;
+}
+
+let count = document.getElementById('count');
+let btnSynthetic = document.getElementById('btnSynthetic');
+let btnSemiSynthetic = document.getElementById('btnSemiSynthetic');
+let message = document.getElementById('message');
+
+function validateInput() {
+    if (count.value === '' || isNaN(count.value) || count.value <= 0) {
+        message.innerHTML = "<strong>Вкажіть кількість палива</strong>";
+        return false;
+    }
+    return true;
+}
+
+btnSynthetic.addEventListener("click", () => {
+    if (validateInput()) {
+        calculation(count.value, 50);
+    }
+});
+
+btnSemiSynthetic.addEventListener("click", () => {
+    if (validateInput()) {
+        calculation(count.value, 40);
+    }
+});
     </script>    
 </body>
 
